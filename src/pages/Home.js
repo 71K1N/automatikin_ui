@@ -5,9 +5,10 @@ import { Teko_300Light } from "@expo-google-fonts/teko"
 import { Feather } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Item from "../components/Item";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
-
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -22,8 +23,8 @@ export default function Home() {
                     </View>
                     <View style={styles.tbTitle}><Text style={styles.titleDesc}>THE TIKIN HOUSE</Text></View>
                     <View style={styles.tbAlarm}>
-                        <Feather
-                            name="bell"
+                        <Feather onPress={()=>{navigation.navigate("Config")}}
+                            name="sliders"
                             size={24}
                             color="#8F8F8F"
                         />
