@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import Zones from "../components/Zones";
-import { Feather } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Item from "../components/Item";
 import { useNavigation } from "@react-navigation/native";
@@ -10,7 +10,7 @@ export default function Home() {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={{ width: "100%" }}>
                 <View style={styles.titleBar}>
                     <View style={styles.tbTemp}>
                         <Feather
@@ -22,7 +22,7 @@ export default function Home() {
                     </View>
                     <View style={styles.tbTitle}><Text style={styles.titleDesc}>THE TIKIN HOUSE</Text></View>
                     <View style={styles.tbAlarm}>
-                        <Feather onPress={()=>{navigation.navigate("Config")}}
+                        <Feather onPress={() => { navigation.navigate("Config") }}
                             name="settings"
                             size={24}
                             color="#8F8F8F"
@@ -30,18 +30,15 @@ export default function Home() {
                     </View>
                 </View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                    <Zones active={1} name="RASPBERRY" />
-                    <Zones active={0} name="QUARTO" />
+                    <Zones active={1} name="QUARTO" />
                     <Zones active={0} name="SALA" />
                     <Zones active={0} name="COZINHA" />
                     <Zones active={0} name="VARANDA" />
-                    <Zones active={0} name="VARANDA" />
+                    <Zones active={0} name="EXTERNO" />
                 </ScrollView>
 
                 <View style={styles.itemList} >
-                    <Item pin={4} color="#27C3F9" />
-                    <Item pin={2} color="#1AB857"/>
-                    <Item pin={3} color="#EDB525"/>
+                    <Item pin={2} color="#1CBFB7" />
                 </View>
             </ScrollView>
         </View>
@@ -52,6 +49,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#343534",
         height: "100%",
+        width: '100%',
         paddingTop: 5,
         flexDirection: "column",
         alignItems: "flex-start",
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10        
     },
     tbTemp: {
         width: "25%",
@@ -92,11 +90,11 @@ const styles = StyleSheet.create({
         color: "#8F8F8F"
 
     },
-    itemList:{
-        paddingTop:20,
-        margin:10,
-        width:"90%",
-        alignItems:"center",
+    itemList: {
+        paddingTop: 20,
+        margin: 10,
+        width: "100%",
+        alignItems: "center",
     }
 
 })

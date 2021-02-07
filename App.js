@@ -1,6 +1,5 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar'; //status bar
-import {Text, View } from 'react-native';
 import Routes from "./src/router";
 import{useFonts, Montserrat_400Regular, Montserrat_500Medium, Montserrat_700Bold} from '@expo-google-fonts/montserrat'
 import{Teko_300Light,Teko_400Regular} from '@expo-google-fonts/teko'

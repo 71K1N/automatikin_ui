@@ -13,7 +13,7 @@ export default function Config() {
 
     const [hasIp, seHasIp] = useState(false)
 
-    const [showSetIP, setShowSetIP] = useState(false)
+    const [canSetIP, setCanSetIP] = useState(false)    
     const [showActiveServer, setShowActiveServer] = useState(false)
 
 
@@ -49,8 +49,7 @@ export default function Config() {
         }
     }
 
-    _editIpServer = () => {        
-        setShowSetIP(true)
+    _editIpServer = () => {                
         setServerIp(activeServerIp)
     }
 

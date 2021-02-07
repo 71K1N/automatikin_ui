@@ -1,37 +1,61 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import api from "../lib/api";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Switch, AsyncStorage } from "react-native";
+import { Feather, FontAwesome } from "@expo/vector-icons";
+import axios from "axios";
 import {
     Montserrat_400Regular,
     Montserrat_500Medium,
     Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat"
 
-//  ALTERAR ESTADO DO LED
-function changeLedState(pin, state) {
-    api.post(`/pinout/${pin}/${state}`)
-}
 
 export default function Item(props) {
-    const pin= props.pin;
-    const cor= props.color;
+    const pin = props.pin;
+    const cor = props.color;
+
+    const [activeServerIp, setActiveServerIp] = useState("")
+    const url =`http://${activeServerIp}:8080`
+
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState)
-        const state = (isEnabled?0:1)
-        changeLedState(pin,state)
+        const state = (isEnabled ? 0 : 1)
+        changeLedState(pin, state)
     }
+
+    useEffect(() => {
+        _getIpServer()
+    })
+
+    _getIpServer = async () => {
+        try {
+            const ip = await AsyncStorage.getItem('serverIP')
+            if (ip != null) {
+                setActiveServerIp(ip)
+            } else {
+                setActiveServerIp("")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //  ALTERAR ESTADO DO LED
+    function changeLedState(pin, state) {
+        axios.post(`${url}/pinout/${pin}/${state}`)
+    }
+
     return (
-        <View style={[styles.container,{backgroundColor:cor}]}>
+
+        <View style={[styles.container, { backgroundColor: cor }]}>
             <Feather
-                name="target"
+                name="sun"
                 size={40}
                 color="#fff"
             />
             <View>
-                <Text style={styles.itenTitle}>LED </Text>
-                <Text style={styles.itenDesc}>Um led bacana</Text>
+                <Text style={styles.itenTitle}>LAMPADA</Text>
+                <Text style={styles.itenDesc}>Lampada pricipal</Text>
             </View>
             <Switch
                 trackColor={{ false: "#343534", true: "#D4D7D6" }}
@@ -39,7 +63,7 @@ export default function Item(props) {
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}
-                style={{alignSelf:"flex-start"}}
+                style={{ alignSelf: "flex-start" }}
             />
         </View>
     )
@@ -49,13 +73,13 @@ const styles = StyleSheet.create({
     container: {
         height: 150,
         width: 150,
-        marginTop:15,
+        marginTop: 15,
         //backgroundColor: cor,
         borderRadius: 20,
         padding: 10,
         flexDirection: "column",
         justifyContent: "space-between",
-        elevation:1
+        elevation: 1
     },
     itenTitle: {
         fontFamily: "Montserrat_700Bold",
