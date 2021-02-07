@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import Zones from "../components/Zones";
-import { Teko_300Light } from "@expo-google-fonts/teko"
 import { Feather } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Item from "../components/Item";
@@ -24,7 +23,7 @@ export default function Home() {
                     <View style={styles.tbTitle}><Text style={styles.titleDesc}>THE TIKIN HOUSE</Text></View>
                     <View style={styles.tbAlarm}>
                         <Feather onPress={()=>{navigation.navigate("Config")}}
-                            name="sliders"
+                            name="settings"
                             size={24}
                             color="#8F8F8F"
                         />
